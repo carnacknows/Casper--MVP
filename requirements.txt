@@ -1,0 +1,6 @@
+streamlit==1.42.0
+tenseal==0.3.0
+pandas==2.2.3
+numpy==2.2.1
+plotly==6.0.0
+faker==37.0.0
