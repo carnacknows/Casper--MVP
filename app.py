@@ -47,7 +47,7 @@ with tab1:
             operation = st.selectbox("What do you want to compute privately?", 
                                    ["Average Cholesterol", "Average Blood Pressure", 
                                     "Average Diabetes Risk", "Count High-Risk Patients (>70)"])
-        with col2:
+                with col2:
             if st.button("👻 Compute Privately with Casper", type="primary"):
                 with st.spinner("Computing privately..."):
                     col_name = "Cholesterol" if "Cholesterol" in operation else \
@@ -59,9 +59,10 @@ with tab1:
                     else:
                         result = (df[col_name] > 70).sum()
 
-                                       st.success(f"✅ Casper computed it! Result: **{result:.2f}**")
+                    # ── Technical completion block ──
+                    st.success(f"✅ Casper computed it! Result: **{result:.2f}**")
 
-                    # Technical privacy metrics (feels like real homomorphic compute)
+                    # Privacy metrics (feels like real homomorphic compute)
                     col1, col2, col3 = st.columns(3)
                     col1.metric("Encrypted Values", f"{len(df)}", "CKKS Vector")
                     col2.metric("Operations Performed", "1", "Homomorphic Sum")
