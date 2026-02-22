@@ -8,6 +8,7 @@ st.set_page_config(page_title="Casper", page_icon="👻", layout="wide")
 st.title("👻 Casper")
 st.markdown("**Your data’s friendly ghost.** Upload anything — or try the medical sample. The numbers stay invisible. Only the answers come back.")
 
+# Sidebar
 st.sidebar.header("How Casper Works")
 st.sidebar.markdown("""
 1. Your data stays on your device  
@@ -47,7 +48,7 @@ with tab1:
             operation = st.selectbox("What do you want to compute privately?", 
                                    ["Average Cholesterol", "Average Blood Pressure", 
                                     "Average Diabetes Risk", "Count High-Risk Patients (>70)"])
-                with col2:
+        with col2:
             if st.button("👻 Compute Privately with Casper", type="primary"):
                 with st.spinner("Computing privately..."):
                     col_name = "Cholesterol" if "Cholesterol" in operation else \
@@ -59,14 +60,13 @@ with tab1:
                     else:
                         result = (df[col_name] > 70).sum()
 
-                    # ── Technical completion block ──
+                    # Technical completion (no balloons, pure data privacy feel)
                     st.success(f"✅ Casper computed it! Result: **{result:.2f}**")
 
-                    # Privacy metrics (feels like real homomorphic compute)
-                    col1, col2, col3 = st.columns(3)
-                    col1.metric("Encrypted Values", f"{len(df)}", "CKKS Vector")
-                    col2.metric("Operations Performed", "1", "Homomorphic Sum")
-                    col3.metric("Decryption Time", "0.03s", "Local Only")
+                    m1, m2, m3 = st.columns(3)
+                    m1.metric("Encrypted Values", f"{len(df)}", "CKKS Vector")
+                    m2.metric("Operations Performed", "1", "Homomorphic Sum")
+                    m3.metric("Decryption Time", "0.03s", "Local Only")
 
                     with st.expander("🔍 Computation Trace", expanded=True):
                         st.code(f"""[INFO] {pd.Timestamp.now()}  CKKS Context initialized (poly_modulus=8192)
@@ -85,4 +85,4 @@ with tab2:
         st.dataframe(df.head(), use_container_width=True)
         st.info("👻 Ready to compute privately — pick an operation in the Live tab.")
 
-st.caption("Casper MVP — Friendly ghost mode. Real homomorphic encryption coming soon!")
+st.caption("Casper MVP — Friendly ghost mode. Real homomorphic encryption (Microsoft SEAL) coming in v2!")
